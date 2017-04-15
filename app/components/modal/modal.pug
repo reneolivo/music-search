@@ -1,0 +1,7 @@
+.modal-cmp
+  .modal-cmp-header
+    figure(ng-transclude="cover")
+    h2.modal-cmp-header-title(ng-transclude="title")
+    a.close(href="#") Close
+
+  .modal-cmp-content(ng-transclude="content")

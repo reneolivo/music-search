@@ -4,6 +4,8 @@ $fa-font-path: '~font-awesome/fonts';
 @import "../../components/main-view/main-view.scss";
 @import "../../components/no-results/no-results.scss";
 @import "../../components/search-results/search-results.scss";
+@import "../../components/modal/modal.scss";
+@import "../../components/album-details/album-details.scss";
 
 body {
   margin: 0;
