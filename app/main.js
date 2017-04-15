@@ -1,9 +1,5 @@
 import './assets/css/main.scss';
 
-import 'jquery';
-import 'angular';
-
-angular.module('music-search', [])
-.component('mainView', {
-  template: require('./main-view.pug')()
-});
+import './components/main-view/main-view';
+import './components/no-results/no-results';
+import './components/search-results/search-results';

@@ -1,0 +1,12 @@
+.no-results-cmp {
+  &:before {
+    @extend .fa, .fa-search;
+    font-size: 160px;
+    color: $background-color;
+  }
+
+  padding: 90px 0;
+  text-align: center;
+  font-size: 22px;
+  color: #444655;
+}
