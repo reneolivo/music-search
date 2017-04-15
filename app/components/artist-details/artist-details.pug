@@ -1,0 +1,17 @@
+.artist-details-cmp
+  modal
+    modal-cover
+      img(src="https://i.scdn.co/image/0651ae56bfe1baf5c30aa7c047a9f991afbd35dc")
+    modal-title Café Tacvba
+
+    modal-content
+      h3 Albums
+
+      .albums-list
+        each album in [1,2,3,4]
+          article.album
+            a(href="#")
+              figure
+                  img(src="https://i.scdn.co/image/0651ae56bfe1baf5c30aa7c047a9f991afbd35dc")
+              h4 Cuatro Caminos
+              p.release-date 2003

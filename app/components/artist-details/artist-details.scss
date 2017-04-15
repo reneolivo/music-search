@@ -1,0 +1,40 @@
+.artist-details-cmp {
+  modal-content {
+    h3 { @extend .modal-content-title; }
+  }
+
+  .albums-list {
+    article.album {
+      clear: both;
+      float: left;
+      margin-bottom: 26px;
+      width: 100%;
+
+      figure {
+        float: left;
+        margin: 0;
+        margin-right: 20px;
+        width: 100px;
+      }
+
+      figure img { width: 100%; }
+
+      a {
+        text-decoration: none;
+        color: $font-color;
+      }
+
+      h4 {
+        margin-top: 20px;
+        margin-bottom: 22px;
+        font-size: 18px;
+      }
+
+      p {
+        margin: 0;
+        font-size: 16px;
+        color: $font-gray-color;
+      }
+    }
+  }
+}
