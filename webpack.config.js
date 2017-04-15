@@ -33,6 +33,20 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.(png|jpg|jpeg|gif)$/,
+        loader: 'file-loader',
+        query: {
+          name: '../dist/images/[name].[ext]'
+        }
+      },
+      {
+        test: /\.(ttf|eot|woff2?|svg)(\?v=.*)?$/,
+        loader: 'file-loader',
+        query: {
+          name: '../dist/fonts/[name].[ext]'
+        }
+      },
+      {
         test: require.resolve('jquery'),
         loader: 'expose-loader?jQuery!expose-loader?$'
       }
