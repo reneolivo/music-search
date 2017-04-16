@@ -3,17 +3,14 @@
     h1 Music Search
     p Powered by Spotify
 
-  form#search
-    .input
-      input(type="text", placeholder="Search for Artist or Album title")
-      button(type="submit") Search
+  search-input(ng-model="vm.search", ng-change="vm.onSearch()")
 
   #search-results
     //no-results
     search-results
 
   //album-details
-  artist-details
+  //artist-details
 
   footer#main-footer
     p Designed by Geek Label - Powered by Spotify

@@ -5,7 +5,9 @@
   "main": "index.html",
   "scripts": {
     "build": "webpack",
-    "start:watch": "webpack-dev-server"
+    "start:dev": "webpack-dev-server",
+    "test": "karma start",
+    "test:dev": "karma start --auto-watch --no-single-run"
   },
   "keywords": [
     "spotify",
@@ -15,6 +17,7 @@
   "author": "René Olivo <rene@meta.do>",
   "license": "MIT",
   "devDependencies": {
+    "angular-mocks": "^1.6.4",
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -23,6 +26,13 @@
     "expose-loader": "^0.7.3",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.6.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-spec-reporter": "0.0.31",
+    "karma-webpack": "^2.0.3",
     "node-sass": "^4.5.2",
     "pug": "^2.0.0-beta11",
     "pug-loader": "^2.3.0",
