@@ -24,14 +24,30 @@ class WebDriver {
   sendKeys(childName, value) {
     const child = this.element.find(childName);
     child.val(value);
-    angular.element(child).triggerHandler('change');
+    child.triggerHandler('change');
+
+    return this;
+  }
+
+  setModelValue(childName, value) {
+    const child = this.element.find(childName);
+    const scope = child.isolateScope();
+    scope.vm.ngModel.$setViewValue(value);
+
+    return this;
+  }
+
+  componentScope(callback) {
+    const scope = this.element.isolateScope().vm;
+
+    callback(scope);
 
     return this;
   }
 
   submit(childName) {
     const form = this.element.find(childName);
-    angular.element(form).triggerHandler('submit');
+    form.triggerHandler('submit');
 
     return this;
   }
@@ -47,7 +63,7 @@ app.service('WebDriver', [
       Object.assign(scope, scopeData);
 
       let element = $compile(htmlString)(scope);
-      element = jQuery(element);
+      element = angular.element(element);
 
       return new WebDriver(element, scope);
     }

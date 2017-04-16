@@ -2,14 +2,23 @@ import app from '../../app';
 
 class MainViewCtrl {
   search = 'Hello';
+  searchResults = [];
+
+  constructor(spotify) {
+    this.spotify = spotify;
+  }
 
   onSearch() {
-    console.log('###', this.search);
+    this.spotify.search(this.search)
+    .then((response) => this.searchResults = response);
   }
 }
 
 app.component('mainView', {
   controllerAs: 'vm',
-  controller: MainViewCtrl,
+  controller: [
+    'SpotifyService',
+    MainViewCtrl
+  ],
   template: require('./main-view.pug')()
 });
