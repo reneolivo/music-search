@@ -2,13 +2,7 @@ $fa-font-path: '~font-awesome/fonts';
 @import "~font-awesome/scss/font-awesome.scss";
 @import "./globals";
 @import "./helpers";
-@import "../../components/main-view/main-view.scss";
-@import "../../components/search-input/search-input.scss";
-@import "../../components/no-results/no-results.scss";
-@import "../../components/search-results/search-results.scss";
-@import "../../components/modal/modal.scss";
-@import "../../components/album-details/album-details.scss";
-@import "../../components/artist-details/artist-details.scss";
+@import "../../components/**/*.scss";
 
 body {
   margin: 0;

@@ -6,7 +6,7 @@ const path = require('path');
 const SRC = path.join(__dirname, 'app');
 const DIST = path.join(__dirname, 'dist');
 
-let cssLoader = 'style-loader!css-loader!sass-loader';
+let cssLoader = 'style-loader!css-loader!sass-loader!import-glob-loader';
 let sourcemap = 'inline-source-map';
 
 module.exports = {
