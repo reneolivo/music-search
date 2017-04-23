@@ -2,8 +2,13 @@ import 'angular';
 import jQuery from 'jquery';
 import 'angular-mocks';
 import './lib/web-driver';
+import componentSpy from './lib/component-spy';
 
-beforeEach(angular.mock.module('music-search'));
+global.componentSpy = componentSpy;
+
+beforeEach(angular.mock.module('music-search', function($provide) {
+  componentSpy.$provide = $provide;
+}));
 
 afterEach(() => jQuery('body').empty());
 

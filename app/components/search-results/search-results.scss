@@ -16,12 +16,26 @@
     &:nth-child(4n) { margin-right: 0; }
     &:nth-child(4n+1) { clear: both; }
 
+    &.ng-enter {
+      transition: 1s linear all;
+      opacity: 0;
+    }
+
+    &.ng-enter.ng-enter-active {
+      opacity: 1;
+    }
+
+    &.ng-enter-stagger {
+      transition-delay: .1s;
+      transition-duration: 0s;
+    }
+
     a { display: block; text-decoration: none; }
     figure {
       position: relative;
       overflow: hidden;
       margin: 0;
-      max-height: 265px;
+      height: 265px;
       border-top-right-radius: $border-radius;
       border-top-left-radius: $border-radius;
     }

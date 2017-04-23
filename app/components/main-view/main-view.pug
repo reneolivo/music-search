@@ -6,8 +6,8 @@
   search-input(ng-model="vm.search", ng-change="vm.onSearch()")
 
   #search-results
-    //no-results
-    search-results
+    no-results(ng-if="vm.searchResults.length == 0")
+    search-results(results="vm.searchResults")
 
   //album-details
   //artist-details

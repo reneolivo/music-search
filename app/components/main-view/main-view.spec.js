@@ -8,22 +8,35 @@ describe('Main View', () => {
 
   it('should search Spotify when *input-search* changes', shouldSearchSpotify);
 
-  it('should display *no-results* when .searchResults is empty');
+  it('should display *no-results* when .searchResults is empty', shouldDisplayNoResultsWhenEmpty);
 
-  it('should hide *no-results* when .searchResults has records');
+  it('should hide *no-results* when .searchResults has records', shouldHideNoResultsWhenNotEmpty);
 
-  it('should pass .searchResults to *search-results*');
+  it('should pass .searchResults to *search-results*', shouldPassSearchResults);
 });
 
 let component;
 let SpotifyService;
 let results;
-let timeout;
+let searchResults;
 
-function setup(WebDriver, _SpotifyService_, $timeout) {
+function setup(WebDriver, _SpotifyService_) {
+  setupSearchResults();
+  setupSpotifyService(_SpotifyService_);
+
   component = WebDriver('<main-view></main-view>');
+}
+
+function setupSearchResults() {
+  searchResults = componentSpy('searchResults', {
+    bindings: {
+      results: '<'
+    }
+  });
+}
+
+function setupSpotifyService(_SpotifyService_) {
   SpotifyService = _SpotifyService_;
-  timeout = $timeout;
 
   results = artistsData.artists.items;
 
@@ -46,4 +59,18 @@ function shouldSearchSpotify(done) {
     component.componentScope((scope) => expect(scope.searchResults).toBe(results));
     done();
   });
+}
+
+function shouldDisplayNoResultsWhenEmpty() {
+  expect(component.countChildren('no-results')).toBe(1);
+}
+
+function shouldHideNoResultsWhenNotEmpty() {
+  component.componentScope((scope) => scope.searchResults = results);
+  expect(component.countChildren('no-results')).toBe(0);
+}
+
+function shouldPassSearchResults() {
+  component.componentScope((scope) => scope.searchResults = results);
+  expect(searchResults.bindings.results).toBe(results);
 }

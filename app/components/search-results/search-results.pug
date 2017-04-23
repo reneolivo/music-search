@@ -1,7 +1,6 @@
 #search-results-list
-  each result in [1,2,3,4,5,6]
-    article.search-result.type-artist
-      a(href="#")
-        figure
-          img(src="https://i.scdn.co/image/0651ae56bfe1baf5c30aa7c047a9f991afbd35dc")
-        h2 Café Tacvba
+  article.search-result.fadeIn(ng-repeat="result in vm.results", class="type-{{ result.type }}")
+    a(href="#")
+      figure
+        img(ng-src="{{ result.images[1].url }}")
+      h2 {{ result.name }}

@@ -8,7 +8,7 @@ class WebDriver {
     this.scope = scope;
   }
 
-  digest(callback) {
+  digest(callback = () => {}) {
     this.scope.$digest();
     callback();
 
@@ -41,6 +41,7 @@ class WebDriver {
     const scope = this.element.isolateScope().vm;
 
     callback(scope);
+    this.digest();
 
     return this;
   }
@@ -50,6 +51,16 @@ class WebDriver {
     form.triggerHandler('submit');
 
     return this;
+  }
+
+  countChildren(childrenName) {
+    let child = this.element.find(childrenName);
+
+    return child.length;
+  }
+
+  find(childName) {
+    return jQuery(this.element[0]).find(childName);
   }
 }
 
@@ -64,8 +75,11 @@ app.service('WebDriver', [
 
       let element = $compile(htmlString)(scope);
       element = angular.element(element);
+      document.body.append(element[0]);
 
-      return new WebDriver(element, scope);
+      const driver = new WebDriver(element, scope);
+      driver.digest();
+      return driver;
     }
   }
 ]);
