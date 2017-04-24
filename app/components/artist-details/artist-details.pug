@@ -9,7 +9,7 @@
 
       .albums-list
         article.album(ng-repeat="album in vm.albums")
-          a
+          a(ng-click="vm.onAlbumSelect({$album: album})")
             figure
               img(ng-src="{{ album.images[1].url }}")
             h4 {{ album.name }}

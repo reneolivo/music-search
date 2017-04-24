@@ -10,7 +10,7 @@ describe('Album Details', () => {
 
   it('should display the album details', shouldDisplayAlbumDetails);
 
-  it('should open the modal each time the artist changes', shouldOpenModalWhenAlbumChanges);
+  it('should open the modal each time the album changes', shouldOpenModalWhenAlbumChanges);
 
   it('should load the album`s tracks when the album changes', shouldLoadTracks);
 });

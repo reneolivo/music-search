@@ -26,7 +26,8 @@ class ArtistDetailsCmp {
 app.component('artistDetails', {
   template: require('./artist-details.pug')(),
   bindings: {
-    artist: '<'
+    artist: '<',
+    onAlbumSelect: '&',
   },
   controllerAs: 'vm',
   controller: [

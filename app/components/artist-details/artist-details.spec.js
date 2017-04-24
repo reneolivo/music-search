@@ -14,19 +14,25 @@ describe('Artist Details', () => {
   it('should open the modal each time the artist changes', shouldOpenModalWhenArtistChanges);
 
   it('should load the artist albums when the artist changes', shouldLoadAlbums);
+
+  it('should fire an event when an album is selected', shouldFireEventOnSelectAlbum);
 });
 
 let component;
 let spotify;
 let artist;
 let albums;
+let onAlbumSelect;
 
 function setup(WebDriver) {
   artist = artistsData.artists.items[0];
   albums = albumsData.albums.items;
 
-  component = WebDriver('<artist-details artist="artist"></artist-details>', {
-    artist
+  onAlbumSelect = jasmine.createSpy('onAlbumSelect');
+
+  component = WebDriver('<artist-details artist="artist" on-album-select="onAlbumSelect($album)"></artist-details>', {
+    artist,
+    onAlbumSelect,
   });
 }
 
@@ -74,6 +80,15 @@ function shouldLoadAlbums(done) {
     expect(image).toBe(albums[0].images[1].url);
     expect(title).toBe(albums[0].name);
 
+    done();
+  });
+}
+
+function shouldFireEventOnSelectAlbum(done) {
+  Promise.resolve().then(() => {
+    component.click('article.album:first a');
+
+    expect(onAlbumSelect).toHaveBeenCalledWith(albums[0]);
     done();
   });
 }

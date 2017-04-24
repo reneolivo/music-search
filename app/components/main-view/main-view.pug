@@ -9,7 +9,7 @@
     no-results(ng-if="vm.searchResults.length == 0")
     search-results(results="vm.searchResults", on-select="vm.select($result)")
 
-  artist-details(ng-if="vm.selectedResult.type == 'artist'", artist="vm.selectedResult")
+  artist-details(ng-if="vm.selectedResult.type == 'artist'", artist="vm.selectedResult", on-album-select="vm.selectedResult = $album")
 
   album-details(ng-if="vm.selectedResult.type == 'album'", album="vm.selectedResult")
 

@@ -18,6 +18,8 @@ describe('Main View', () => {
   it('should display an artist`s details when an artist is selected from the *search-results', shouldDisplayArtist);
 
   it('should display an album`s details when an album is selected from the *search-results*', shouldDisplayAlbum);
+
+  it('should display an album`s details when an album is selected from *artist-details*', shouldDisplayAlbumFromArtistDetails);
 });
 
 let component;
@@ -103,8 +105,9 @@ function shouldDisplayArtist(done) {
 
     expect(artistDetails.bindings.artist).toBe(results[0]);
     done();
-  });
+  }, 0);
 }
+
 function shouldDisplayAlbum(done) {
   expect(component.countChildren('album-details'))
   .toBe(0);
@@ -121,5 +124,24 @@ function shouldDisplayAlbum(done) {
 
     expect(albumDetails.bindings.album).toBe(album);
     done();
-  });
+  }, 0);
+}
+
+function shouldDisplayAlbumFromArtistDetails() {
+  expect(component.countChildren('album-details'))
+  .toBe(0);
+
+  component.componentScope((scope) => scope.selectedResult = results[0]);
+
+  const album = albumsData.albums.items[0];
+  artistDetails.bindings.onAlbumSelect({ $album: album });
+  component.digest();
+
+  expect(component.countChildren('album-details'))
+  .toBe(1);
+  expect(component.countChildren('artist-details'))
+  .toBe(0);
+
+  expect(albumDetails.bindings).toBeDefined();
+  expect(albumDetails.bindings.album).toBe(album);
 }

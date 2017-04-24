@@ -27,7 +27,7 @@ class MainViewCtrl {
     setTimeout(() => {
       this.selectedResult = result;
       this.scope.$digest();
-    });
+    }, 0);
   }
 }
 
