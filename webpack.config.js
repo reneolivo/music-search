@@ -2,12 +2,30 @@
 
 const webpack = require('webpack');
 const path = require('path');
+const Extract = require('extract-text-webpack-plugin');
 
 const SRC = path.join(__dirname, 'app');
 const DIST = path.join(__dirname, 'dist');
 
+const extractCss = new Extract('main.css');
 let cssLoader = 'style-loader!css-loader!sass-loader!import-glob-loader';
 let sourcemap = 'inline-source-map';
+let plugins = [
+  extractCss,
+];
+
+if (process.env.ENV === 'production') {
+  cssLoader = extractCss.extract([
+    'css-loader',
+    'sass-loader',
+    'import-glob-loader',
+  ]);
+  sourcemap = 'source-map';
+  plugins.push(new webpack.optimize.UglifyJsPlugin({
+    compress: { warnings: false },
+    sourceMap: true,
+  }))
+}
 
 module.exports = {
   entry: path.join(SRC, 'main.js'),
@@ -58,5 +76,6 @@ module.exports = {
   stats: {
     colors: true
   },
+  plugins: plugins,
   devtool: sourcemap
 };
