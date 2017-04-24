@@ -11,6 +11,10 @@ describe('Spotify Service', () => {
   it('should define a .search method', shouldDefineSearchMethod);
 
   it('should return artists and albums when calling .search', shouldReturnArtistsAndAlbums);
+
+  it('should define a .findArtistAlbums method', shouldDefineFindArtistAlbumMethod);
+
+  it('should find artist`s albums and return them', shouldReturnArtistsAlbums);
 });
 
 let service;
@@ -51,6 +55,25 @@ function shouldReturnArtistsAndAlbums(done) {
       { type: 'album', q: query }
     ]);
 
+    done();
+  });
+}
+
+function shouldDefineFindArtistAlbumMethod() {
+  expect(service.findArtistAlbums).toBeDefined();
+}
+
+function shouldReturnArtistsAlbums(done) {
+  const url = 'https://api.spotify.com/v1/artists/123/albums';
+  spyOn(jQuery, 'get')
+  .and.returnValue(Promise.resolve(albums.albums));
+
+  const promise = service.findArtistAlbums(123);
+  expect(jQuery.get).toHaveBeenCalledWith(url);
+  expect(promise instanceof Promise).toBe(true);
+
+  promise.then(function(results) {
+    expect(results).toBe(albums.albums.items);
     done();
   });
 }

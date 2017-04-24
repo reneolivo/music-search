@@ -30,6 +30,13 @@ class SpotifyService {
     })
     .then((response) => response.albums.items);
   }
+
+  findArtistAlbums(artistId) {
+    const url = `${this.baseUrl}/artists/${artistId}/albums`;
+
+    return jQuery.get(url)
+    .then((results) => results.items);
+  }
 }
 
 app.service('SpotifyService', SpotifyService);

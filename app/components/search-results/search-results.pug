@@ -1,6 +1,6 @@
 #search-results-list
   article.search-result.fadeIn(ng-repeat="result in vm.results", class="type-{{ result.type }}")
-    a(href="#")
+    a(ng-click="vm.onSelect({$result: result})")
       figure
         img(ng-src="{{ result.images[1].url }}")
       h2 {{ result.name }}

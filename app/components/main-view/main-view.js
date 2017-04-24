@@ -1,9 +1,10 @@
 import app from '../../app';
 import '../../services/spotify';
 import '../search-results/search-results';
+import '../artist-details/artist-details';
 
 class MainViewCtrl {
-  search = 'Hello';
+  search = '';
   searchResults = [];
 
   constructor(scope, spotify) {
@@ -15,6 +16,15 @@ class MainViewCtrl {
     this.spotify.search(this.search)
     .then((response) => {
       this.searchResults = response;
+      this.scope.$digest();
+    });
+  }
+
+  select(result) {
+    delete this.selectedResult;
+
+    setTimeout(() => {
+      this.selectedResult = result;
       this.scope.$digest();
     });
   }

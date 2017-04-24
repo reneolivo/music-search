@@ -1,7 +1,8 @@
-.modal-cmp
-  .modal-cmp-header
-    figure(ng-transclude="cover")
-    h2.modal-cmp-header-title(ng-transclude="title")
-    a.close(href="#") Close
+.modal-background(ng-click="vm.isOpen = false", ng-if="vm.isOpen")
+  .modal-cmp
+    .modal-cmp-header
+      figure(ng-transclude="cover")
+      h2.modal-cmp-header-title(ng-transclude="title")
+      a.close(ng-click="vm.isOpen = false") Close
 
-  .modal-cmp-content(ng-transclude="content")
+    .modal-cmp-content(ng-transclude="content")

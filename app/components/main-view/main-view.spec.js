@@ -13,26 +13,30 @@ describe('Main View', () => {
   it('should hide *no-results* when .searchResults has records', shouldHideNoResultsWhenNotEmpty);
 
   it('should pass .searchResults to *search-results*', shouldPassSearchResults);
+
+  it('should display an artist`s details when an artist is selected from the *search-results', shouldDisplayArtist);
 });
 
 let component;
 let SpotifyService;
 let results;
 let searchResults;
+let artistDetails;
 
 function setup(WebDriver, _SpotifyService_) {
   setupSearchResults();
+  setupArtistDetails();
   setupSpotifyService(_SpotifyService_);
 
   component = WebDriver('<main-view></main-view>');
 }
 
 function setupSearchResults() {
-  searchResults = componentSpy('searchResults', {
-    bindings: {
-      results: '<'
-    }
-  });
+  searchResults = componentSpy('searchResults');
+}
+
+function setupArtistDetails() {
+  artistDetails = componentSpy('artistDetails');
 }
 
 function setupSpotifyService(_SpotifyService_) {
@@ -73,4 +77,20 @@ function shouldHideNoResultsWhenNotEmpty() {
 function shouldPassSearchResults() {
   component.componentScope((scope) => scope.searchResults = results);
   expect(searchResults.bindings.results).toBe(results);
+}
+
+function shouldDisplayArtist(done) {
+  expect(component.countChildren('artist-details'))
+  .toBe(0);
+
+  searchResults.bindings.onSelect({$result: results[0] });
+  component.digest();
+
+  setTimeout(() => {
+    expect(component.countChildren('artist-details'))
+    .toBe(1);
+
+    expect(artistDetails.bindings.artist).toBe(results[0]);
+    done();
+  });
 }

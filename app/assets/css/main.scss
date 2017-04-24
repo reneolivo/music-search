@@ -1,5 +1,6 @@
 $fa-font-path: '~font-awesome/fonts';
 @import "~font-awesome/scss/font-awesome.scss";
+@import "./animations";
 @import "./globals";
 @import "./helpers";
 @import "../../components/**/*.scss";
@@ -15,3 +16,5 @@ body {
 h1,h2,h3,h4,h5,h6 {
   font-weight: normal;
 }
+
+a { cursor: pointer; }

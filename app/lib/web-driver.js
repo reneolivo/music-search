@@ -5,6 +5,7 @@ import app from '../app';
 class WebDriver {
   constructor(element, scope) {
     this.element = element;
+    this.jQuery = jQuery(element[0]);
     this.scope = scope;
   }
 
@@ -16,7 +17,9 @@ class WebDriver {
   }
 
   click(childName) {
-    this.element.find(childName).click();
+    let child = this.jQuery.find(childName);
+    child = angular.element(child[0]);
+    child.triggerHandler('click');
 
     return this;
   }
@@ -54,13 +57,13 @@ class WebDriver {
   }
 
   countChildren(childrenName) {
-    let child = this.element.find(childrenName);
+    let child = this.find(childrenName);
 
     return child.length;
   }
 
   find(childName) {
-    return jQuery(this.element[0]).find(childName);
+    return this.jQuery.find(childName);
   }
 }
 

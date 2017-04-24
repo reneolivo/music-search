@@ -1,5 +1,4 @@
-modal {
-  content: '';
+.modal-background {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,6 +7,26 @@ modal {
   height: 100vh;
   background: transparentize($background-color, 0.8);
   z-index: 1;
+
+
+
+  animation-name: fadeIn;
+  animation-duration: 1s;
+
+  &.ng-leave-active {
+    animation-name: fadeOut;
+  }
+
+  .modal-cmp {
+    animation-name: moveUp;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in;
+  }
+
+  &.ng-leave-active .modal-cmp {
+    animation-name: moveDown;
+    top: 60%;
+  }
 }
 
 .modal-cmp {
