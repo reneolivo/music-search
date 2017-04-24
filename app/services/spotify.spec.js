@@ -2,6 +2,7 @@ import jQuery from 'jquery';
 import './spotify';
 import artists from '../mocks/data/artists';
 import albums from '../mocks/data/albums';
+import tracks from '../mocks/data/tracks';
 
 describe('Spotify Service', () => {
   beforeEach(inject(setup));
@@ -15,6 +16,8 @@ describe('Spotify Service', () => {
   it('should define a .findArtistAlbums method', shouldDefineFindArtistAlbumMethod);
 
   it('should find artist`s albums and return them', shouldReturnArtistsAlbums);
+
+  it('should find album`s tracks and return them', shouldReturnAlbumTracks);
 });
 
 let service;
@@ -74,6 +77,21 @@ function shouldReturnArtistsAlbums(done) {
 
   promise.then(function(results) {
     expect(results).toBe(albums.albums.items);
+    done();
+  });
+}
+
+function shouldReturnAlbumTracks(done) {
+  const url = 'https://api.spotify.com/v1/albums/123/tracks';
+  spyOn(jQuery, 'get')
+  .and.returnValue(Promise.resolve(tracks));
+
+  const promise = service.findAlbumTracks(123);
+  expect(jQuery.get).toHaveBeenCalledWith(url);
+  expect(promise instanceof Promise).toBe(true);
+
+  promise.then(function(results) {
+    expect(results).toBe(tracks.items);
     done();
   });
 }

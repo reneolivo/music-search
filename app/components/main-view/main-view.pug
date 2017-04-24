@@ -9,8 +9,9 @@
     no-results(ng-if="vm.searchResults.length == 0")
     search-results(results="vm.searchResults", on-select="vm.select($result)")
 
-  artist-details(ng-if="vm.selectedResult", artist="vm.selectedResult")
-  //album-details
+  artist-details(ng-if="vm.selectedResult.type == 'artist'", artist="vm.selectedResult")
+
+  album-details(ng-if="vm.selectedResult.type == 'album'", album="vm.selectedResult")
 
   footer#main-footer
     p Designed by Geek Label - Powered by Spotify

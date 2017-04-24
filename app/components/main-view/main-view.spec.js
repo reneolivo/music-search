@@ -1,5 +1,6 @@
 import './main-view';
 import artistsData from '../../mocks/data/artists';
+import albumsData from '../../mocks/data/albums';
 
 describe('Main View', () => {
   beforeEach(inject(setup));
@@ -15,6 +16,8 @@ describe('Main View', () => {
   it('should pass .searchResults to *search-results*', shouldPassSearchResults);
 
   it('should display an artist`s details when an artist is selected from the *search-results', shouldDisplayArtist);
+
+  it('should display an album`s details when an album is selected from the *search-results*', shouldDisplayAlbum);
 });
 
 let component;
@@ -22,10 +25,12 @@ let SpotifyService;
 let results;
 let searchResults;
 let artistDetails;
+let albumDetails;
 
 function setup(WebDriver, _SpotifyService_) {
   setupSearchResults();
   setupArtistDetails();
+  setupAlbumDetails();
   setupSpotifyService(_SpotifyService_);
 
   component = WebDriver('<main-view></main-view>');
@@ -37,6 +42,10 @@ function setupSearchResults() {
 
 function setupArtistDetails() {
   artistDetails = componentSpy('artistDetails');
+}
+
+function setupAlbumDetails() {
+  albumDetails = componentSpy('albumDetails');
 }
 
 function setupSpotifyService(_SpotifyService_) {
@@ -87,10 +96,30 @@ function shouldDisplayArtist(done) {
   component.digest();
 
   setTimeout(() => {
+    expect(component.countChildren('album-details'))
+    .toBe(0);
     expect(component.countChildren('artist-details'))
     .toBe(1);
 
     expect(artistDetails.bindings.artist).toBe(results[0]);
+    done();
+  });
+}
+function shouldDisplayAlbum(done) {
+  expect(component.countChildren('album-details'))
+  .toBe(0);
+
+  const album = albumsData.albums.items[0];
+  searchResults.bindings.onSelect({ $result: album });
+  component.digest();
+
+  setTimeout(() => {
+    expect(component.countChildren('album-details'))
+    .toBe(1);
+    expect(component.countChildren('artist-details'))
+    .toBe(0);
+
+    expect(albumDetails.bindings.album).toBe(album);
     done();
   });
 }

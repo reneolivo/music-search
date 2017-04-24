@@ -1,12 +1,11 @@
 .album-details-cmp
-  modal
+  modal(is-open="vm.isOpen")
     modal-cover
-      img(src="https://i.scdn.co/image/0651ae56bfe1baf5c30aa7c047a9f991afbd35dc")
-    modal-title Café Tacvba - Cuatro Caminos
+      img(ng-src="{{ vm.album.images[0].url }}")
+    modal-title {{ vm.album.artists[0].name }} - {{ vm.album.name }}
     modal-content
       h3 Tracks
-      ol
-        each track in [1,2,3,4,5,6,7,8,9]
-          li
-            h4 Track name
-            span 3:06
+      ol.tracks
+        li(ng-repeat="track in vm.tracks")
+          h4 {{ track.name }}
+          span.track-length {{ track.duration_ms | duration }}

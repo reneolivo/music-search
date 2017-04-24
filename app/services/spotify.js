@@ -37,6 +37,13 @@ class SpotifyService {
     return jQuery.get(url)
     .then((results) => results.items);
   }
+
+  findAlbumTracks(albumId) {
+    const url = `${this.baseUrl}/albums/${albumId}/tracks`;
+
+    return jQuery.get(url)
+    .then((results) => results.items);
+  }
 }
 
 app.service('SpotifyService', SpotifyService);

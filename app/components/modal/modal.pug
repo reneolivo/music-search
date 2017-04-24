@@ -1,4 +1,4 @@
-.modal-background(ng-click="vm.isOpen = false", ng-if="vm.isOpen")
+.modal-background(ng-click="vm.close($event)", ng-if="vm.isOpen")
   .modal-cmp
     .modal-cmp-header
       figure(ng-transclude="cover")

@@ -2,6 +2,7 @@ import app from '../../app';
 import '../../services/spotify';
 import '../search-results/search-results';
 import '../artist-details/artist-details';
+import '../album-details/album-details';
 
 class MainViewCtrl {
   search = '';
