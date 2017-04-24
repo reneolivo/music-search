@@ -5,9 +5,11 @@ A music search app using the Spotify API
 ### Instructions
 
 1. Run `npm install`. Make sure to install *dev-dependencies*.
-2. To view the application run: `npm run start:dev`.
-3. To run the tests execute: `npm run test`.
-4. for **TDD** run `npm run test:dev`.
+2. View the application and make changes run: `npm run start:dev`.
+3. Build productions files: `npm run build`.
+4. Run on production: `npm start`.
+5. Run the tests execute: `npm run test`.
+6. for **TDD** run `npm run test:dev`.
 
 
 ### Description
